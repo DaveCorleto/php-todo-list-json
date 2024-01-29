@@ -14,21 +14,28 @@ export default {
   methods: {
     pushTask() {
       const t = this;
+      const config = {
+        headers: {
+          'Content-Type': 'multipart-form-data'
+        }
+      };
       const params = {
         params: {
-          newTask: this.newTask
+          text: this.newTask
         }
       };
 
-      axios.get('http://localhost/php-todo-list-json/Back-End/array.php', params)
+      axios.get('http://localhost/php-todo-list-json/Back-End/pushTasks.php', params, config)
         .then(res => {
           console.log(res.data);
+          t.todolist = res.data;
         })
         .catch(err => console.log(err));
     }
   },
   mounted() {
     const t = this;
+
     axios.get('http://localhost/php-todo-list-json/Back-End/array.php')
       .then(res => {
         t.todolist = res.data;

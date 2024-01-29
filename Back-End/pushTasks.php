@@ -1,5 +1,11 @@
 <?php
 
+// Specifico come deve essere codificato in modo che Javascript lo capisca 
+header ('Content-Type: application/json');
+header ('Access-Control-Allow-Headers: X-Requested-With');
+// Autorizzo tutti i domini ad accedere al mio backend 
+header ("Access-Control-Allow-Origin: *");
+
 $todolist = [
     [
         "text" => "Fare la Spesa",
@@ -43,13 +49,14 @@ $todolist = [
     ]
 ];
 
+echo json_encode($todolist);
 
-echo ("GET :");
-var_dump ($_GET);
-echo ("POST :");
-var_dump ($_POST);
+// echo ("GET :");
+// var_dump ($_GET);
+// echo ("POST :");
+// var_dump ($_POST);
 
-$newTask = (%_GET "text");
-var_dump($newTask);
+// $newTask = (%_GET "text");
+// var_dump($newTask);
 
 ?>
