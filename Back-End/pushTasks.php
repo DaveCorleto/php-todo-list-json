@@ -6,57 +6,25 @@ header ('Access-Control-Allow-Headers: X-Requested-With');
 // Autorizzo tutti i domini ad accedere al mio backend 
 header ("Access-Control-Allow-Origin: *");
 
-$todolist = [
-    [
-        "text" => "Fare la Spesa",
-        "done" => "False"
-    ],
-    [
-        "text" => "Studiare Php",
-        "done" => "False"
-    ],
-    [
-        "text" => "Fare Colazione",
-        "done" => "False"
-    ],
-    [
-        "text" => "Fare il Letto",
-        "done" => "False"
-    ],
-    [
-        "text" => "Cucinare il Pranzo",
-        "done" => "False"
-    ],
-    [
-        "text" => "Andare a Correre",
-        "done" => "False"
-    ],
-    [
-        "text" => "Buttare la Spazzatura",
-        "done" => "False"
-    ],
-    [
-        "text" => "Conquistare il Mondo",
-        "done" => "False"
-    ],
-    [
-        "text" => "Inventare una Pizza Dimagrante",
-        "done" => "False"
-    ],
-    [
-        "text" => "Suonare a Wembley",
-        "done" => "False"
-    ]
+$jsonTasks = file_get_contents(__DIR__ . "/tasks.json");
+
+$todolist = json_decode($jsonTasks, true);
+
+$newTaskText = $_POST['text'];
+
+// Definisco che i parametri della chiamata axios text e done andranno a costituire un oggetto (newTask) dell'array associativo 
+
+$newTask = [
+    "text" => $newTaskText,
+    "done" => false
 ];
 
-echo json_encode($todolist);
+// Inserisco la variabile newtasks ottenuto tramite chiamata post axios nell'array todolist 
+$todolist[] = $newTask;
 
-// echo ("GET :");
-// var_dump ($_GET);
-// echo ("POST :");
-// var_dump ($_POST);
+$jsonTasks = json_encode($todolist);
+file_put_contents(__DIR__ . "/tasks.json", $jsonTasks);
+echo $jsonTasks;
 
-// $newTask = (%_GET "text");
-// var_dump($newTask);
 
 ?>
