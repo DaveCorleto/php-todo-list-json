@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       todolist: [],
-      newTask: "",
+      newTaskText: "",
     };
   },
   name: "AppMain",
@@ -21,7 +21,7 @@ export default {
       };
       const params = {
         params: {
-          text: this.newTask
+          text: this.newTaskText,
         }
       };
 
